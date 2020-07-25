@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orderitemwebapi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: OrderItemWebApi
+  template:
+    metadata:
+      labels:
+        app: OrderItemWebApi
+    spec:
+      containers:
+      - name: orderitemwebapi
+        image: imgcontainer03.azurecr.io/orderrepos:latest
+        ports:
+        - containerPort: 8080
+      imagePullSecrets:wallpapersn
+      - name: menusn
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: orderitemwebapi
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+  selector:
+    app: OrderItemWebApi
